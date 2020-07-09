@@ -58,4 +58,16 @@ class CompaniesControllerTest < ApplicationSystemTestCase
     assert_equal "28173", last_company.zip_code
   end
 
+  test "Destroy" do
+    visit company_path(@company)
+
+    company_count = Company.count
+    accept_alert do
+      click_link('Delete')
+    end
+
+    assert_text "Company Destroyed"
+    assert_equal company_count - 1, Company.count
+  end
+
 end
